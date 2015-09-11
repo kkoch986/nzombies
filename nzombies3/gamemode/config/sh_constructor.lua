@@ -51,7 +51,7 @@ if SERVER then
 	//Perks
 
 	//Player Class
-	nz.Config.BaseStartingWeapons = {"fas2_glock20"} //"fas2_p226", "fas2_ots33", "fas2_glock20" "weapon_pistol"
+	nz.Config.BaseStartingWeapons = {"fas2_machete", "fas2_glock20"} //"fas2_p226", "fas2_ots33", "fas2_glock20" "weapon_pistol"
 	//nz.Config.CustomConfigStartingWeps = true -- If this is set to false, the gamemode will avoid using custom weapons in configs
 
 	//Points

@@ -6,6 +6,11 @@ if SERVER then
 			nz.Mapping.Functions.WallBuy(data.vec, data.class, tonumber(data.price), data.ang)
 		end
 	end
+
+	function nz.Interfaces.Functions.GiveWepHandler( ply, data )
+		print(ply)
+		ply:Give(data["Row1"])
+	end
 end
 
 if CLIENT then
@@ -26,17 +31,42 @@ if CLIENT then
 		DermaPanel:Center()
 
 		local DProperties = vgui.Create( "DProperties", DermaPanel )
-		DProperties:SetSize( 280, 180 )
+		DProperties:SetSize( 280, 220 )
 		DProperties:SetPos( 10, 30 )
 
 		local Row1 = DProperties:CreateRow( "Weapon Settings", "Weapon Class" )
-		Row1:Setup( "Generic" )
+		Row1:Setup( "Combo", {} )
 		Row1:SetValue( valz["Row1"] )
-		Row1.DataChanged = function( _, val ) valz["Row1"] = val end
+		for k,v in pairs( weapons.GetList() ) do 
+			if v.Spawnable then
+				Row1:AddChoice(v.ClassName, v)
+			end
+		end
+		Row1.DataChanged = function( _, val ) 
+			PrintTable(val) 
+			valz["Row1"] = val.ClassName 
+		end
+
+
 		local Row2 = DProperties:CreateRow( "Weapon Settings", "Price" )
 		Row2:Setup( "Integer" )
 		Row2:SetValue( valz["Row2"] )
 		Row2.DataChanged = function( _, val ) valz["Row2"] = val end
+
+		local GrabButton = vgui.Create( "DButton" )
+		GrabButton:SetParent( DermaPanel )
+		GrabButton:SetText( "Test Drive" )
+		GrabButton:SetPos( 10, 100 )
+		GrabButton:SetSize( 280, 30 )
+		GrabButton.DoClick = function()
+
+			//Check the weapon class is fine first
+			if weapons.Get( valz["Row1"] ) != nil then
+				nz.Interfaces.Functions.SendRequests( "GiveWep", valz )
+			end
+
+		end
+
 
 		local DermaButton = vgui.Create( "DButton" )
 		DermaButton:SetParent( DermaPanel )

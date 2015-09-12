@@ -51,11 +51,17 @@ if SERVER then
 	//Perks
 
 	//Player Class
-	nz.Config.BaseStartingWeapons = {"fas2_machete", "fas2_glock20"} //"fas2_p226", "fas2_ots33", "fas2_glock20" "weapon_pistol"
+	nz.Config.BaseStartingWeapons = {"fas2_glock20"} //"fas2_p226", "fas2_ots33", "fas2_glock20" "weapon_pistol"
 	//nz.Config.CustomConfigStartingWeps = true -- If this is set to false, the gamemode will avoid using custom weapons in configs
 
 	//Points
 	nz.Config.BaseStartingPoints = 500
+	nz.Config.PointsForHeadshot = 50
+	nz.Config.PointsForHit = 10
+	nz.Config.PointsForKill = 90
+
+	//Damage
+	nz.Config.HeadshotMultiplier = 10
 
 	//Powerups
 
@@ -64,10 +70,10 @@ if SERVER then
 	//Random Box
 
 	nz.Config.WeaponBlackList = {
-	"weapon_base", "weapon_fists", "weapon_flechettegun", "weapon_medkit",
-	"weapon_dod_sim_base", "weapon_dod_sim_base_shot", "weapon_dod_sim_base_snip", "weapon_sim_admin", "weapon_sim_spade",
-	"fas2_base", "fas2_ammobox", "fas2_ifak", "fas2_base_shotgun",
-	"nz_tool_base", "nz_tool_barricades", "nz_tool_block_spawns", "nz_tool_door_locker", "nz_tool_elec", "nz_tool_perk_machine", "nz_tool_player_spawns", "nz_tool_prop_modifier", "nz_tool_random_box", "nz_tool_template", "nz_tool_wall_buys", "nz_tool_zed_spawns"
+		"weapon_base", "weapon_fists", "weapon_flechettegun", "weapon_medkit",
+		"weapon_dod_sim_base", "weapon_dod_sim_base_shot", "weapon_dod_sim_base_snip", "weapon_sim_admin", "weapon_sim_spade",
+		"fas2_base", "fas2_ammobox", "fas2_ifak", "fas2_base_shotgun",
+		"nz_tool_base", "nz_tool_barricades", "nz_tool_block_spawns", "nz_tool_door_locker", "nz_tool_elec", "nz_tool_perk_machine", "nz_tool_player_spawns", "nz_tool_prop_modifier", "nz_tool_random_box", "nz_tool_template", "nz_tool_wall_buys", "nz_tool_zed_spawns"
 	}
 
 	//Round Handler

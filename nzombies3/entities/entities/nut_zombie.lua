@@ -261,18 +261,12 @@ function ENT:OnInjured(damageInfo)
 	//Deal an double damage if headshot
 	if hitgroup == HITGROUP_HEAD then
 		if self:IsValid() and damageInfo:GetDamageType() != DMG_BLAST_SURFACE then
-			local headshot = DamageInfo()
-			headshot:SetDamage(damageInfo:GetDamage( ))
-			headshot:SetAttacker(attacker)
-			headshot:SetDamageType(DMG_BLAST_SURFACE)
-			print("Headshot! ", headshot:GetDamage( ))
-			//Delay so it doesn't "die" twice
-			timer.Simple(0.1, function() if self:IsValid() then self:TakeDamageInfo( headshot ) end end)
+			damageInfo:SetDamage(nz.Config.HeadshotMultiplier * damageInfo:GetDamage() )
 		end
 	end
 	self:EmitSound(table.Random(painSounds), 50, math.random(50, 130))
 	self.target = attacker
 	self:AlertNearby(attacker, 1000)
 
-	nz.Enemies.Functions.OnEnemyHurt( self, attacker, hitgroup )
+	nz.Enemies.Functions.OnEnemyHurt( self, attacker, hitgroup, damageInfo )
 end

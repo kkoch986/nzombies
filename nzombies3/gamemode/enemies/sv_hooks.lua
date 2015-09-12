@@ -4,7 +4,7 @@
 function nz.Enemies.Functions.OnEnemyKilled(enemy, attacker)
 
 	if attacker:IsPlayer() then
-		attacker:GivePoints(90)
+		attacker:GivePoints(nz.Config.PointsForKill)
 		attacker:AddFrags(1)
 	end
 
@@ -12,22 +12,27 @@ function nz.Enemies.Functions.OnEnemyKilled(enemy, attacker)
 	//nz.Rounds.Data.ZombiesSpawned = nz.Rounds.Data.ZombiesSpawned - 1
 
 	//Chance a powerup spawning
-	if nz.PowerUps.Functions.IsPowerupActive("insta") == false and enemy:IsValid() then //Don't spawn powerups during instakill
+	if nz.PowerUps.Functions.IsPowerupActive("insta") == false and enemy:IsValid() then //Dont spawn powerups during instakill
 		nz.PowerUps.Functions.SpawnPowerUp(enemy:GetPos())
 	end
 
 	print("Killed Enemy: " .. nz.Rounds.Data.KilledZombies .. "/" .. nz.Rounds.Data.MaxZombies )
 end
 
-function nz.Enemies.Functions.OnEnemyHurt(enemy, attacker)
+function nz.Enemies.Functions.OnEnemyHurt(enemy, attacker, hitgroup, dmginfo)
 	if attacker:IsPlayer() and enemy:IsValid() then
-		attacker:GivePoints(10)
+
+		if hitgroup == HITGROUP_HEAD then
+			attacker:GivePoints(nz.Config.PointsForHeadshot)
+		else
+			attacker:GivePoints(nz.Config.PointsForHit)
+		end
 		if nz.PowerUps.Functions.IsPowerupActive("insta") then
 			local insta = DamageInfo()
 			insta:SetDamage(enemy:Health())
 			insta:SetAttacker(attacker)
 			insta:SetDamageType(DMG_BLAST_SURFACE)
-			//Delay so it doesn't "die" twice
+			//Delay so it doesnt "die" twice
 			timer.Simple(0.1, function() if enemy:IsValid() and enemy:Health() > 0 then enemy:TakeDamageInfo( insta ) end end)
 		end
 	end

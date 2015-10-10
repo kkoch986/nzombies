@@ -27,13 +27,21 @@ function nz.Enemies.Functions.OnEnemyHurt(enemy, attacker, hitgroup, dmginfo)
 		else
 			attacker:GivePoints(nz.Config.PointsForHit)
 		end
+
+		hook.Run("EntityTakeDamagePost", enemy, dmginfo);
+
 		if nz.PowerUps.Functions.IsPowerupActive("insta") then
 			local insta = DamageInfo()
 			insta:SetDamage(enemy:Health())
 			insta:SetAttacker(attacker)
 			insta:SetDamageType(DMG_BLAST_SURFACE)
 			//Delay so it doesnt "die" twice
-			timer.Simple(0.1, function() if enemy:IsValid() and enemy:Health() > 0 then enemy:TakeDamageInfo( insta ) end end)
+			timer.Simple(0.1, function() 
+				if enemy:IsValid() and enemy:Health() > 0 then 
+					enemy:TakeDamageInfo( insta ) 
+					hook.Run("EntityTakeDamagePost", enemy, insta) 
+				end 
+			end)
 		end
 	end
 end

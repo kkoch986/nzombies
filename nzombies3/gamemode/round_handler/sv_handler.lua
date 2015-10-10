@@ -194,6 +194,7 @@ function nz.Rounds.Functions.SetupGame()
 	end
 
 	nz.Doors.Functions.LockAllDoors()
+	nz.Doors.Functions.UnlockFreeDoors()
 
 	//Open all doors with no price and electricity requirement
 	for k,v in pairs(ents.GetAll()) do

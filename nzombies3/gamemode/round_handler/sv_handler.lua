@@ -255,7 +255,7 @@ function nz.Rounds.Functions.RoundHandler()
 	end
 
 	//If we've killed all the zombies, then progress to the next level.
-	if (nz.Rounds.Data.KilledZombies == nz.Rounds.Data.MaxZombies) and nz.Rounds.Data.CurrentState == ROUND_PROG then
+	if (nz.Rounds.Data.KilledZombies >= nz.Rounds.Data.MaxZombies) and nz.Rounds.Data.CurrentState == ROUND_PROG then
 		nz.Rounds.Functions.PrepareRound()
 	end
 
